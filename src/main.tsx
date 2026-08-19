@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
@@ -63,7 +63,7 @@ const commandDescriptions: Record<string, string> = {
   contact: 'contact details',
   github: 'open GitHub',
   cv: 'open CV',
-  clear: 'clear terminal',
+  clear: 'clearing terminal',
   consi: 'mimimimimi <3'
 }
 
@@ -167,7 +167,7 @@ function App() {
           <div><small>03 / ABOUT</small><h2>Backend first.<br /><em>Product minded.</em></h2></div>
           <div className="about-copy">
             <p className="big">C# / .NET developer with experience building software in a banking environment and full-stack applications.</p>
-            <p>Pracuję z .NET, SQL Server i Reactem. Interesuje mnie architektura, integracje, fintech oraz tworzenie systemów, które są łatwe do utrzymania i rozwijania.</p>
+            <p>Pracuję z .NET, SQL Server i Reactem. Mam doświadczenie w tworzeniu backendów, REST API i aplikacji biznesowych w środowisku bankowym. Interesuje mnie architektura, integracje, fintech oraz tworzenie systemów, które są łatwe do utrzymania i rozwijania.</p>
           </div>
         </section>
 
@@ -207,7 +207,7 @@ function CodewarsTerminal({ onProject }: { onProject: (p: Project) => void }) {
     terminalRef.current?.scrollTo({ top: terminalRef.current.scrollHeight })
   }, [lines])
 
-  const print = (node: ReactNode) => setLines(prev => [...prev, node])
+  const print = (node: ReactNode) => setLines(prev => [...prev, <Fragment key={`line-${prev.length}`}>{node}</Fragment>])
 
   const run = (raw: string) => {
     const cmd = raw.trim().toLowerCase()
@@ -260,7 +260,7 @@ function CodewarsTerminal({ onProject }: { onProject: (p: Project) => void }) {
     }
     if (cmd === 'help') {
       Object.entries(commandDescriptions).filter(([key]) => key !== 'consi').forEach(([key, desc]) => {
-        print(<div className="help-line"><span>{key}</span>{desc}</div>)
+        print(<div className="help-line"><span>{key}</span> - {desc}</div>)
       })
       return
     }
