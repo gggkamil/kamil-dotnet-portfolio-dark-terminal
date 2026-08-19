@@ -259,7 +259,7 @@ function CodewarsTerminal({ onProject }: { onProject: (p: Project) => void }) {
       return
     }
     if (cmd === 'help') {
-      Object.entries(commandDescriptions).forEach(([key, desc]) => {
+      Object.entries(commandDescriptions).filter(([key]) => key !== 'consi').forEach(([key, desc]) => {
         print(<div className="help-line"><span>{key}</span>{desc}</div>)
       })
       return
