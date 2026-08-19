@@ -102,9 +102,9 @@ function App() {
             </div>
           </div>
 
-          <div className="terminal-wrap">
+          {terminalOpen && <div className="terminal-wrap">
             <CodewarsTerminal onProject={setSelected} />
-          </div>
+          </div>}
         </section>
 
         <div className="ticker">
@@ -239,6 +239,8 @@ function CodewarsTerminal({ onProject }: { onProject: (p: Project) => void }) {
     if (cmd === 'about') {
       print(<div>Kamil Dębicki — <span className="term-blue">C# / .NET Developer</span></div>)
       print(<div className="term-dim">Backend-focused · React · SQL Server · Azure</div>)
+      print(<div className="term-dim">Building REST APIs and business applications in a banking environment.</div>)
+      print(<div className="term-dim">Interested in clean architecture, integrations and fintech.</div>)
       return
     }
     if (cmd === 'stack') {
